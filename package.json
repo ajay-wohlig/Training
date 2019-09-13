@@ -1,0 +1,22 @@
+{
+  "name": "training",
+  "version": "1.0.0",
+  "description": "Testing beta ajays changes",
+  "main": "testlodash.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajay-wohlig/Training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajay-wohlig/Training/issues"
+  },
+  "homepage": "https://github.com/ajay-wohlig/Training#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
