@@ -1,15 +1,38 @@
-const validator = require("validator")
-//const chalk = require("chalk")
+const yargs = require('yargs')
 
-//const notes = require('./notes.js')
+//create add command
+yargs.command({
+    command: 'add',
+    describe: 'add a note',
+    builder: {
+        title: {
+            describe: 'note title',
+            demandOption: 'true',
+            type: 'string'
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: 'true',
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        console.log('Title: ',argv.title)
+        console.log('Body: ',argv.body)
 
-//const command = process.argv[2]
+    }
+})
+//create remove command
 
-console.log(validator.isEmail("ajaySpeechGrammarList.com"))
+yargs.command({
+    command: 'remove',
+    describe: 'remove a command',
+    handler: function(){
+        console.log("Removing a command")
+    }
+})
 
-// if(command == "add"){
-//     console.log("Adding note")
-// }
-// else if(command == "remove"){
-//     console.log("Removing note")
-// }
+
+
+
+console.log(yargs.argv)
