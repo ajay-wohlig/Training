@@ -41,11 +41,14 @@ const removeNote = function(title){
         console.log(chalk.green.inverse("Note Removed"))
     }
 }
+
+//Function for saving notes
 const saveNotes = function(notes){
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json',dataJSON)
 }
 
+//Function for loading notes
 const loadNotes = function(){
     try{
         const dataBuffer = fs.readFileSync('notes.json')
