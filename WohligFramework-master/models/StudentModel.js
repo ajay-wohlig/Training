@@ -8,10 +8,8 @@ export default {
         const students = await Student.find().exec()
         callback(null, students)
     },
-    getOne(data, callback) {
-        Student.findOne({
-            _id: data.id
-        }).exec(callback)
+    getOne: (data, callback)  =>{
+        Student.findOne({_id: data.id}).exec(callback)
     },
     saveData: (data, callback) => {
         const student = new Student(data)

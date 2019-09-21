@@ -5,7 +5,7 @@ var schema = new Schema({
     language: String,
     release_date: Date,
     revenue: Number,
-    producer: String,
+    director: String,
     production_company: [{name: String,website: String}],
     duration: String,
     IMDB_rating: Number,
@@ -13,4 +13,4 @@ var schema = new Schema({
     origin_country: String,
     adult: Boolean
 })
-export default mongoose.model("Movies",schema)
+export default mongoose.model("movie",schema)
