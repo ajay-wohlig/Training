@@ -9,15 +9,29 @@ export default {
         Movies.deleteOne({_id : data.id}).exec(callback)
     },
 
-    searchMovie: (data,callback)=>{
-       
+    //for finding with incomplete title
+    getIncompleteTitle: (data,callback)=>{
+        Movies.find({title: {$regex: data.title, $options: 'i'}}).exec(callback)
+    },
+
+    //for finding with ID
+    getOneId: (data,callback)=>{
+        Movies.findOne({_id: data.id}).exec(callback)
+    },
+
+    //for finding with Exact title
+    getExactTitle: (data,callback)=>{
+        Movies.findOne({title : data.title}).exec(callback)
     },
 
     updateMovie: (data,body,callback) =>{
        Movies.updateOne({_id: data.id},{$set: body}).exec(callback)
     },
 
-    search: function(req) {
-        db.collection.find({_id: })
+    //for finding all movie
+    search: (_query, callback) =>{
+        Movies.find(_query).exec(callback)
+        
     }
+
 }

@@ -8,16 +8,28 @@ router.delete("/:id",(req,res) =>{
     MovieModel.deleteMovie(req.params,res.callback)
 })
 
+//search all
+router.get("/", (req, res) => {
+    MovieModel.search(req.query,res.callback)
+})
+
+//search by id
 router.get("/:id",(req,res) =>{
-    MovieModel.searchMovie(req.params,res.callback)
+    MovieModel.getOneId(req.params,res.callback)
+})
+
+//search by Exact title
+router.get("/title/:title",(req,res) =>{
+    MovieModel.getExactTitle(req.params,res.callback)
+})
+
+//search by incomplete title
+router.get("/incomplete/:title",(req,res) =>{
+    MovieModel.getIncompleteTitle(req.params,res.callback)
 })
 
 router.put("/:id",(req,res) =>{
     MovieModel.updateMovie(req.params,req.body,res.callback)
-})
-
-router.get("/", (req, res) => {
-    MovieModel.search()
 })
 
 export default router
