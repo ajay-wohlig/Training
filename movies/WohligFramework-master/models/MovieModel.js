@@ -59,5 +59,11 @@ export default {
         //     }
         // }
         )
+    },
+
+    searchParallel: (query,callback) => {
+        async.parallel({movies: {}, directed_by: {}},callback)
     }
+
+    
 }

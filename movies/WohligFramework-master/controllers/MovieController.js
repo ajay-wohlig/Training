@@ -37,6 +37,10 @@ router.get("/async/",(req,res) =>{
     MovieModel.searchasync(req.query,res.callback)
 })
 
+router.get("/parallelApi/",(req,res) =>{
+    MovieModel.searchParallel(req.query,res.callback)
+})
+
 router.put("/:id",(req,res) =>{
     MovieModel.updateMovie(req.params,req.body,res.callback)
 })
