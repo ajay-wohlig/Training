@@ -14,7 +14,9 @@ router.get("/", (req, res) => {
 })
 
 //search by id
-router.get("/:id",(req,res) =>{
+// localhost:3000/Movie/async
+router.get("/getOneId/:id",(req,res) =>{
+    //console.log("in defferent rout")
     MovieModel.getOneId(req.params,res.callback)
 })
 
@@ -26,6 +28,13 @@ router.get("/title/:title",(req,res) =>{
 //search by incomplete title
 router.get("/incomplete/:title",(req,res) =>{
     MovieModel.getIncompleteTitle(req.params,res.callback)
+})
+
+//async waterfall api
+// localhost:3000/Movie/async
+
+router.get("/async/",(req,res) =>{
+    MovieModel.searchasync(req.query,res.callback)
 })
 
 router.put("/:id",(req,res) =>{

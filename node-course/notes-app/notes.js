@@ -1,10 +1,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-//const getNotes = function(a,b){
-const getNotes = (a,b) =>{
-    return "Your notes..."
-}
 
 //Adding a note
 
@@ -15,9 +11,9 @@ const addNote = (title,body) => {
     // const duplicateNotes = notes.filter(function(note){
     //     return note.title==title
     // })
-    const duplicateNotes = notes.filter((note) => note.title==title)
+    const duplicateNotes = notes.filter((note) => note.title == title)
 
-    if(duplicateNotes.length==0){
+    if(duplicateNotes.length == 0){
         notes.push({
             title: title,
             body: body

@@ -11,6 +11,10 @@ var schema = new Schema({
     IMDB_rating: Number,
     budget: Number,
     origin_country: String,
-    adult: Boolean
+    adult: Boolean,
+    directed_by:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "director"
+    }
 })
 export default mongoose.model("movie",schema)
