@@ -97,6 +97,19 @@ export default {
                         callback
                     )
                 }
+                // concat: async.concat(
+                //     Movies.find(),
+                //     (element, callback) => {
+                //         callback(null, element.director)
+                //     },
+                //     (error, result) => {
+                //         if (error) {
+                //             callback(error, null)
+                //         } else {
+                //             callback(null, result)
+                //         }
+                //     }
+                // )
             },
             callback
         ),
@@ -124,7 +137,7 @@ export default {
     },
 
     searchConcat: (query, callback) => {
-        async.each(
+        async.concat(
             Movies.find(),
             (val, next) => {
                 console.log("valvalval::::", val)
