@@ -46,9 +46,9 @@ router.put("/:id", (req, res) => {
     MovieModel.updateMovie(req.params, req.body, res.callback)
 })
 
-router.get("/whilstApi/", (req, res) => {
-    MovieModel.searchWhilst(req.query, res.callback)
-})
+// router.get("/whilstApi/", (req, res) => {
+//     MovieModel.searchWhilst(req.query, res.callback)
+// })
 
 router.get("/concatApi/", (req, res) => {
     MovieModel.searchConcat(req.query, res.callback)

@@ -96,56 +96,99 @@ export default {
                     Directors.find({}, { director_firstname: 1, _id: 0 }).exec(
                         callback
                     )
+                },
+                concat: (callback) => {
+                    async.concat(
+                        Movies.find(),
+                        (element, callback) => {
+                            callback(null, element.title)
+                        },
+                        callback
+                    )
+                },
+                each: (callback) => {
+                    async.each(
+                        Movies.find(),
+                        (element, callback) => {
+                            callback(null)
+                        },
+                        (error, results) => {
+                            if (error) {
+                                callback(error, null)
+                            } else {
+                                console.log(results)
+                                callback(null, "Succesfull")
+                            }
+                        }
+                    )
+                },
+                concatLimit: (callback) => {
+                    async.concatLimit(
+                        Movies.find(),
+                        9,
+                        (element, callback) => {
+                            callback(null, element.title)
+                        },
+                        callback
+                    )
+                },
+                filter: (callback) => {
+                    async.filter(
+                        Movies.find({}, { title: 1, revenue: 1 }),
+                        (val, callback) => {
+                            callback(null, val.revenue < 5)
+                        },
+                        (error, result) => {
+                            if (error) {
+                                callback(error, null)
+                            } else {
+                                callback(null, result)
+                            }
+                        }
+                    )
+                },
+                every: (callback) => {
+                    async.every(
+                        Movies.find({}, { title: 1, revenue: 1 }),
+                        (val, callback) => {
+                            callback(null, val.revenue > 0)
+                        },
+                        (error, result) => {
+                            if (error) {
+                                callback(error, null)
+                            } else {
+                                callback(null, result)
+                            }
+                        }
+                    )
+                },
+                groupby: (callback) => {
+                    async.groupBy(
+                        Movies.find({}, { title: 1, director: 1 }),
+                        (val, callback) => {
+                            callback(null, val.director)
+                        },
+                        callback
+                    )
+                },
+                searchWhilst: (callback) => {
+                    var count = 0
+                    const revenue = 6
+                    async.whilst(
+                        function test(callback) {
+                            callback(null, count <= revenue)
+                        },
+                        function movieDetails(callback) {
+                            Movies.find(
+                                { revenue: count },
+                                { title: 1, _id: 0, revenue: 1, director: 1 }
+                            ).exec(callback)
+                            count++
+                        },
+                        callback
+                    )
                 }
-                // concat: async.concat(
-                //     Movies.find(),
-                //     (element, callback) => {
-                //         callback(null, element.director)
-                //     },
-                //     (error, result) => {
-                //         if (error) {
-                //             callback(error, null)
-                //         } else {
-                //             callback(null, result)
-                //         }
-                //     }
-                // )
-            },
-            callback
-        ),
-
-    searchWhilst: (query, callback) => {
-        const revenue = query.revenue
-        var count = 0
-        async.whilst(
-            function test(callback) {
-                callback(null, count <= revenue)
-            },
-            function movieDetails(callback) {
-                setTimeout(function() {
-                    Movies.find(
-                        { revenue: count },
-                        { title: 1, _id: 0, revenue: 1, director: 1 }
-                    ).exec(function(err, data) {
-                        console.log(data)
-                    })
-                }, 1000)
-                count++
             },
             callback
         )
-    },
-
-    searchConcat: (query, callback) => {
-        async.concat(
-            Movies.find(),
-            (val, next) => {
-                console.log("valvalval::::", val)
-                next(null, val.title)
-            },
-            (error, result) => {
-                callback(null, result)
-            }
-        )
-    }
 }
