@@ -7,6 +7,7 @@
     "author": "Chintan Shah <chintan@wohlig.com>",
     "license": "MIT",
     "scripts": {
+        "test": "mocha",
         "start": "nodemon index.js",
         "build": "docker build -t wohlig/wohlig-framework:latest .",
         "serve": "docker run -p 3000:3000 wohlig/wohlig-framework:latest"
@@ -23,6 +24,7 @@
         "@babel/preset-env": "^7.1.0",
         "@babel/register": "^7.0.0",
         "@babel/runtime": "^7.1.2",
+        "chai": "^4.2.0",
         "eslint": "^5.6.0"
     },
     "prettier": {
