@@ -15,7 +15,8 @@
     "dependencies": {
         "async": "^3.1.0",
         "lodash": "^4.17.15",
-        "wohlig-framework-core": "latest"
+        "wohlig-framework-core": "latest",
+        "yarn": "^1.19.1"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",

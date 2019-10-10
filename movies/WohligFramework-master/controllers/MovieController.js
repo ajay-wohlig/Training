@@ -43,6 +43,7 @@ router.get("/parallelApi/", (req, res) => {
 
 router.put("/:id", (req, res) => {
     console.log(req.params)
+    console.log(req.body)
     MovieModel.updateMovie(req.params, req.body, res.callback)
 })
 
