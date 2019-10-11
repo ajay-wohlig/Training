@@ -1,10 +1,13 @@
 const router = Router()
 
+const MovieModel = require("../models/MovieModel")
+
 router.post("/", (req, res) => {
     MovieModel.saveMovie(req.body, res.callback)
 })
 
 router.delete("/:id", (req, res) => {
+    console.log("Inside controller",req.params)
     MovieModel.deleteMovie(req.params, res.callback)
 })
 

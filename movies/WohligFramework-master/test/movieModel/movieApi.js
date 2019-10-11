@@ -7,7 +7,7 @@ const server = "http://localhost:3000/movie/"
 describe("Movies", function() {
     it("positive test case for delete", (done) => {
         chai.request(server)
-            .delete("/5d95c72c32e9fa5cde56c3a4")
+            .delete("5d95c72c32e9fa5cde56c3a4")
             .send()
             .end((err, res) => {
                 expect(err).to.be.null
@@ -18,7 +18,7 @@ describe("Movies", function() {
 
     it("negative test case for delete", (done) => {
         chai.request(server)
-            .delete("/11652")
+            .delete("11652")
             .send()
             .end((err, res) => {
                 expect(err).to.be.null
@@ -32,7 +32,7 @@ describe("checking positive and negative get request", () => {
     describe("/get my request", () => {
         it("positive get request", (done) => {
             chai.request(server)
-                .get("/getOneId/5d85c07a675163365f0848b1")
+                .get("getOneId/5d85c07a675163365f0848b1")
                 .send()
                 .end((err, res) => {
                     expect(err).to.be.null
@@ -45,7 +45,7 @@ describe("checking positive and negative get request", () => {
     describe("/get my request", () => {
         it("negative get request", (done) => {
             chai.request(server)
-                .get("/getOneId/ahdu12")
+                .get("getOneId/ahdu12")
                 .send()
                 .end((err, res) => {
                     expect(err).to.be.null
@@ -60,7 +60,7 @@ describe("checking positive and negative update request", () => {
     describe("/update my request", () => {
         it("positive update request", (done) => {
             chai.request(server)
-                .put("/5d9b2344dbfdee66d0eea180")
+                .put("5d9b2344dbfdee66d0eea180")
                 .send({
                     director: "director1"
                 })
@@ -74,7 +74,7 @@ describe("checking positive and negative update request", () => {
     describe("/update my request", () => {
         it("negative update request", (done) => {
             chai.request(server)
-                .put("/123456")
+                .put("123456")
                 .send({
                     director: "director1"
                 })
@@ -95,7 +95,7 @@ describe("checking positive and negative test case for post request", () => {
                 language: "English"
             }
             chai.request(server)
-                .post("/")
+                .post("")
                 .send(obj_)
                 .end((err, res) => {
                     expect(err).to.be.null

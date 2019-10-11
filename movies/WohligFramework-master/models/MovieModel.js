@@ -1,13 +1,16 @@
 const async = require("async")
 const _ = require("lodash")
-export default {
+const moviemodel = {
     saveMovie: (data, callback) => {
         const movies = new Movies(data)
         movies.save(callback)
     },
 
     deleteMovie: (data, callback) => {
-        Movies.deleteOne({ _id: data.id }).exec(callback)
+        console.log("data datadddd", data)
+        Movies.deleteOne({ _id: data.id }).exec((err, data) => {
+            callback(err, data)
+        })
     },
 
     //for finding with incomplete title
@@ -192,3 +195,5 @@ export default {
             callback
         )
 }
+
+module.exports = moviemodel
