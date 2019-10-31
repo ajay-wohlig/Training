@@ -13,7 +13,10 @@ chai.use(chaiHttp)
 global.adminUrl = env.url + ":" + env.port + "/"
 
 require("./movieModel/movieApi.js")
-//require("./product/productAPI.js")
+require("./directors/directorApi.js")
+require("./movieModel/movieFunc.js")
+require("./directors/directorFunc.js")
+
 // require("./UserPackage/UserPackageApi.js")
 // require("./UpcomingEvents/UpcomingEventsApi.js")
 // require("./StoreCategory/StoreCategoryApi.js")

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>VueJS Tutorials</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <script src='https://unpkg.com/vue'></script>
+  </head>
+  <body>
+    <div id='vue_app'>
+      <p>{{greet('night')}}</p>
+      <p>Name: {{name}}</p>
+      <p>Job: {{job}}</p>
+      <p v-html='websiteTag'></p>
+      <a v-bind:href='website'>The Net Ninja</a>
+      <input type="text" v-bind:value="name"><br>
+      <button v-on:click='add'>Add a Year</button>
+      <button v-on:click='subtract'>Subtract a Year</button><br>
+      {{age}}
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

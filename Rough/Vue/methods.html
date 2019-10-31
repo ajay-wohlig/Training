@@ -1,0 +1,20 @@
+<html>
+   <head>
+      <title>VueJs Introduction</title>
+      <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   </head>
+   <body>
+      <script>
+         var vm = new Vue({
+            data: { a: 5 },
+            methods: {
+               asquare: function () {
+                  this.a *= this.a;
+               }
+            }
+         })
+         vm.asquare();
+         console.log(vm.a); // 25
+      </script>
+   </body>
+</html>

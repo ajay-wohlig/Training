@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id = 'vm_app'>
+            <p>DATA: {{d1}}</p>
+        </div>
+        <script type='module'>
+            
+            var vm = new Vue({
+                el: '#vm_app',
+                data:{
+                    d1: 'data'
+                },
+                created(){
+                    console.log("From inside create method")
+                    fetch("http://localhost:3000/movie/getOneId/5d9d736963a1f027693e7fae").then((response) =>{
+                    response.json().then((datas) => {
+                        this.d1 = datas.title
+                    console.log("Data: "+datas)
+            })
+        })
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 const async = require("async")
 const _ = require("lodash")
+
 const moviemodel = {
     saveMovie: (data, callback) => {
         const movies = new Movies(data)
@@ -11,6 +12,10 @@ const moviemodel = {
         Movies.deleteOne({ _id: data.id }).exec((err, data) => {
             callback(err, data)
         })
+    },
+
+    deleteByName: (data, callback) => {
+        Movies.deleteMany({ title: data }).exec(callback)
     },
 
     //for finding with incomplete title
@@ -36,9 +41,14 @@ const moviemodel = {
         Movies.updateOne({ _id: data.id }, { $set: body }).exec(callback)
     },
 
-    search: (query, callback) => {
-        var page = 1
-        console.log(page)
+    searchAll: (query, callback) => {
+        Movies.find().exec(callback)
+    },
+
+    search: (params, callback) => {
+        console.log("paramsdata", params.page)
+        console.log("ffsdf")
+        var page = 2
         async.whilst(
             function test(callback) {
                 callback(null, page <= 3)
@@ -67,12 +77,14 @@ const moviemodel = {
                 (data, callback) => {
                     const Dnames = []
                     _.forEach(data, (element) => {
-                        const name = element.directed_by
-                        Dnames.push(
-                            name.director_firstname +
-                                " " +
-                                name.director_lastname
-                        )
+                        if (element.directed_by) {
+                            const name = element.directed_by
+                            Dnames.push(
+                                name.director_firstname +
+                                    " " +
+                                    name.director_lastname
+                            )
+                        }
                     })
                     const UniqNames = _.uniq(Dnames)
                     callback(null, UniqNames)
@@ -89,7 +101,7 @@ const moviemodel = {
         )
     },
 
-    searchParallel: (query, callback) =>
+    searchParallel: (query, callback) => {
         async.parallel(
             {
                 movies: (callback) => {
@@ -115,14 +127,7 @@ const moviemodel = {
                         (element, callback) => {
                             callback(null)
                         },
-                        (error, results) => {
-                            if (error) {
-                                callback(error, null)
-                            } else {
-                                console.log(results)
-                                callback(null, "Succesfull")
-                            }
-                        }
+                        callback
                     )
                 },
                 concatLimit: (callback) => {
@@ -141,13 +146,7 @@ const moviemodel = {
                         (val, callback) => {
                             callback(null, val.revenue < 5)
                         },
-                        (error, result) => {
-                            if (error) {
-                                callback(error, null)
-                            } else {
-                                callback(null, result)
-                            }
-                        }
+                        callback
                     )
                 },
                 every: (callback) => {
@@ -156,13 +155,7 @@ const moviemodel = {
                         (val, callback) => {
                             callback(null, val.revenue > 0)
                         },
-                        (error, result) => {
-                            if (error) {
-                                callback(error, null)
-                            } else {
-                                callback(null, result)
-                            }
-                        }
+                        callback
                     )
                 },
                 groupby: (callback) => {
@@ -194,6 +187,7 @@ const moviemodel = {
             },
             callback
         )
+    }
 }
 
 module.exports = moviemodel

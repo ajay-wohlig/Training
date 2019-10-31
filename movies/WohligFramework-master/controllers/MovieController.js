@@ -7,19 +7,27 @@ router.post("/", (req, res) => {
 })
 
 router.delete("/:id", (req, res) => {
-    console.log("Inside controller",req.params)
+    console.log("Inside controller", req.params)
     MovieModel.deleteMovie(req.params, res.callback)
+})
+
+router.delete("/delete/name", (req, res) => {
+    console.log("in delete by name" + req.query.name)
+    MovieModel.deleteByName(req.query.name, res.callback)
 })
 
 //search all
 router.get("/", (req, res) => {
-    MovieModel.search(req.query, res.callback)
+    MovieModel.searchAll(req.query, res.callback)
+})
+
+router.get("/searchall/pages/:page", (req, res) => {
+    MovieModel.search(req.params, res.callback)
 })
 
 //search by id
 // localhost:3000/Movie/async
 router.get("/getOneId/:id", (req, res) => {
-    //console.log("in defferent rout")
     MovieModel.getOneId(req.params, res.callback)
 })
 

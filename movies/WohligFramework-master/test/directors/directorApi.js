@@ -86,3 +86,31 @@ describe("checking positive and negative update request", () => {
         })
     })
 })
+
+describe("check for save request", () => {
+    it("positive save request", (done) => {
+        chai.request(server)
+            .post("")
+            .send({
+                director_firstname: "Anurag",
+                director_lastname: "Kashyap"
+            })
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.have.status(200)
+            })
+        done()
+    })
+    it("negative update request", (done) => {
+        chai.request(server)
+            .post("faf/")
+            .send({
+                something: 1234
+            })
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.have.status(404)
+            })
+        done()
+    })
+})

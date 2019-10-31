@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id = 'vm_app'>
+            <p>DATA: {{data1}}</p>
+            <form>
+            <input placeholder="ID">
+            <button>Search</button>
+            </form>
+            <p id='p1'></p>
+        </div>
+        <script type='module'>
+            
+            var vm = new Vue({
+                el: '#vm_app',
+                data:{
+                    data1: 'data'
+                },
+                method:{
+
+                },
+                created(){
+                    console.log("From inside create method")
+                    fetch("http://localhost:3000/movie/getOneId/5d8d9651e8a7501809755d30").then((response) =>{
+                    response.json().then((datas) => {
+                        if(datas.path){
+                            return this.data1 = 'Error'
+                        }
+                        this.data1 = datas.title
+                    console.log("Data: "+datas)
+            })
+        })
+                }
+            })
+
+            const searchForm = document.querySelector('form')
+            const search = document.querySelector('input')
+            const msg = document.querySelector('#p1')
+
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+
+                console.log("From outside create method")
+
+                fetch("http://localhost:3000/movie/getOneId/"+search.value).then((response) =>{
+                    response.json().then((datas) => {
+                    msg.textContent = "Movie Name :"+datas.title
+            })
+        })
+            })
+
+
+
+        </script>
+    </body>
+</html>

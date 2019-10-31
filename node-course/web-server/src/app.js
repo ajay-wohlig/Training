@@ -20,6 +20,7 @@ app.get('',(req, res) => {
     res.render('index', {
         title: 'Weather',
         name: 'Ajay'
+        
     })
 })
 
