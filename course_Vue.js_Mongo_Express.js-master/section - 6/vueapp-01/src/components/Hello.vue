@@ -2,23 +2,15 @@
   <div>
 
   <label>Name:</label>
-  <input type='text' placeholder='Movie name' v-model="movieData.title"><br>
+  <input type='text' reqired=true placeholder='Movie name' v-model="movieData.title" required><br>
    <label>Director Name:</label>
-  <input type='text' placeholder='Director Name' v-model="movieData.director"><br>
+  <input type='text' placeholder='Director Name' v-model="movieData.director" required><br>
    <label>Language:</label>
-  <input type='text' placeholder='language' v-model="movieData.language"><br>
+  <input type='text' placeholder='language' v-model="movieData.language" required><br>
 
   <!-- <router-link to="/"> -->
   <button v-on:click="addMovie">Add Movie</button>
   <!-- </router-link> -->
-
-
-<!-- <modal name="Delete-Movie" @before-open= "beforeOpen">
-  Are you sure you want to delete the movie?
-  <br>
-  <button v-on:click="deleteMovie(idtodel)">Yes</button>
-  <button v-on:click="hide">No</button>
-</modal> -->
 
     <table>
   <tr>
@@ -39,7 +31,10 @@
   </tr>
 </table>
 
-<modal :message="idtodel"></modal>
+
+<button v-on:click="toaster">Toast</button>
+
+<modal :message="idtodel" v-on:messagefromchild="deleteMovie"></modal>
   </div>
 </template>
 
@@ -49,7 +44,16 @@ import axios from 'axios'
 import Vue from 'vue'
 import VModal from 'vue-js-modal'
 import modal from "./component/child";
+import Toasted from 'vue-toasted';
+import Vuelidate from 'vuelidate'
+import { required, minLength, between } from 'vuelidate/lib/validators'
+
+
 Vue.use(VModal)
+Vue.use(Toasted, {
+  duration: 5000
+})
+Vue.use(Vuelidate)
 
 export default{
   name: 'Hello',
@@ -59,6 +63,22 @@ export default{
           movieData :{ title : '', director : '', language : '', id : ''},
           idtodel: ""
     }
+    },
+    validations: {
+          movieData: {
+            title:{
+              required,
+              minLength: minLength(4),
+            },
+            director:{
+              required
+            },
+            language:{
+              required,
+              between: between(20, 30)
+            }
+          }    
+
     },
 
   created(){
@@ -82,29 +102,24 @@ export default{
       })
     },
 
-    // deleteMovie(id){
-    //     axios.delete("http://localhost:3000/movie/"+id).then((response) => {
-    //     window.location.reload()
-    //     console.log(response)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
-    // },
-
-    show(id){
-      this.idtodel = id
-    this.$modal.show('Delete-Movie',);
+    deleteMovie(id){
+        axios.delete("http://localhost:3000/movie/"+id).then((response) => {
+        window.location.reload()
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     },
 
-  //   hide(){
-  //   this.$modal.hide('Delete-Movie');
-  //   },
+    toaster(){
+      this.$toasted.show('hello billo')
+    },
 
-  //   beforeOpen (event) {
-  //     console.log("Event ",event.params.id)
-  //     this.idtodel = event.params.id
-  // }
+    show(id){
+    this.idtodel = id
+    this.$modal.show('Delete-Movie',);
+    },
   }
 }
 </script>
